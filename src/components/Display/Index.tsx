@@ -44,7 +44,7 @@ export default function Display({ data, setResponse, setSelectedOptionsTree }: P
         const { id, value } = selectedOption;
         const userId = data?._id;
 
-        if(name.value !== data?.name || selectedOption.id !== data?.seletctedOption.id || agreed !== data?.agreedToTerms){
+        if(name.value !== data?.name || id !== data?.seletctedOption.id || agreed !== data?.agreedToTerms){
             
             if(!name.value ){
                 setName({ value: name.value, error: "Please enter your name" })
@@ -92,7 +92,7 @@ export default function Display({ data, setResponse, setSelectedOptionsTree }: P
     }
 
     const handleSave = async () => {
-        if(selectedOption && data){
+        if(data && selectedOption !== null){
             handleEdit()
             return;
         }
@@ -111,7 +111,7 @@ export default function Display({ data, setResponse, setSelectedOptionsTree }: P
 
         const getIdAndValue = () => {
             if(selectedArr){
-                const { id, value } = selectedArr!.pop() as DataType;
+                const { id, value } = selectedArr![selectedArr.length -1] as DataType;
                 return { id, value }
             } 
         }
@@ -157,6 +157,7 @@ export default function Display({ data, setResponse, setSelectedOptionsTree }: P
                 selectedId={selectedId}
                 setSelectedId={setSelectedId}
                 setSelectedOptionsTree={setSelectedOptionsTree}
+                setSelectedOption={setSelectedOption}
             />
           </div>
 

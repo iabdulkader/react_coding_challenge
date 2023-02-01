@@ -7,9 +7,10 @@ interface Props {
   selectedId: number | null;
   setSelectedId: (id: number | null) => void;
   setSelectedOptionsTree: ((selected: DataType[] | null) => void | undefined) | undefined;
+  setSelectedOption: (option: DataType | null) => void;
 }
 
-export default function NestedSelect ({ data, setSelected, selectedId, setSelectedId,  setSelectedOptionsTree}: Props) {
+export default function NestedSelect ({ data, setSelected, selectedId, setSelectedId,  setSelectedOptionsTree, setSelectedOption }: Props) {
   const [expandedOptions, setexpandedOptions] = useState<number[]>([]);
   
   if(data === null) return <div>Loading...</div>
@@ -25,9 +26,12 @@ export default function NestedSelect ({ data, setSelected, selectedId, setSelect
   };
 
   const handleSelect = (id: number) => {
+    let tree = getselectedId(data, id);
     setSelectedId(id);
-    setSelected(getselectedId(data, id));
-    setSelectedOptionsTree!(getselectedId(data, id));
+    setSelected(tree);
+    setSelectedOptionsTree!(tree);
+
+    setSelectedOption(tree[tree.length - 1])
   };
 
   const getselectedId = (options: DataType[], id: number): DataType[] => {
