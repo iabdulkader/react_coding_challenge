@@ -65,7 +65,15 @@ export default function Display({ data, setResponse, setSelectedOptionsTree }: P
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify({ name: name.value, id, value, userId })
+                body: JSON.stringify({ 
+                    name: name.value, 
+                    seletctedOption:{
+                        id,
+                        value
+                    }, 
+                    agreedToTerms: agreed, 
+                    userId 
+                })
             })
     
             const resData = await response.json()
