@@ -10,9 +10,10 @@ import TermsAgree from "../Terms";
 export interface PropsType {
     data?: User | null;
     setResponse?: (response: User | null) => void;
+    setSelectedOptionsTree?: ((selected: DataType[] | null) => void | undefined) | undefined;
 }
 
-export default function Display({ data, setResponse }: PropsType){
+export default function Display({ data, setResponse, setSelectedOptionsTree }: PropsType){
 
     const [storedata, setStoredData] = useState<DataType[] | null>(null);
     const [name , setName] = useState<{value: string, error: string}>({ value: data?.name || "" , error: "" });
@@ -22,6 +23,8 @@ export default function Display({ data, setResponse }: PropsType){
 
     const [selectedId, setSelectedId] = useState<number | null >(data?.seletctedOption.id || null);
     const [selectedOption, setSelectedOption] = useState<any | null>(data?.seletctedOption || null);
+
+    
     
 
 
@@ -29,7 +32,7 @@ export default function Display({ data, setResponse }: PropsType){
         const apiCall = async () => {
         const response = await fetch('/api/getalldata')
         const data = await response.json()
-        setStoredData(data.data)
+        setStoredData(data.data.sort((a: DataType, b: DataType) => a.id - b.id))
         }
 
         apiCall()
@@ -145,6 +148,7 @@ export default function Display({ data, setResponse }: PropsType){
                 setSelected={setSelectedArr} 
                 selectedId={selectedId}
                 setSelectedId={setSelectedId}
+                setSelectedOptionsTree={setSelectedOptionsTree}
             />
           </div>
 

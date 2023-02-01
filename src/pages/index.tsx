@@ -2,16 +2,16 @@ import Head from 'next/head'
 import { Inter } from '@next/font/google'
 import { useState } from 'react'
 import Display from '@/components/Display/Index'
-import { User } from '@/types'
+import { DataType, User } from '@/types'
 import { Toaster } from 'react-hot-toast'
+import SeletedTree from '@/components/SeletedTree'
 
 const inter = Inter({ subsets: ['latin'] })
 
 export default function Home() {
 
   const [response, setResponse] = useState<User | null>(null)
-
-
+  const [selectedOptionsTree, setSelectedOptionsTree] = useState<DataType[] | null>(null)
   
   return (
     <>
@@ -24,16 +24,18 @@ export default function Home() {
       <div className='bg-slate-800 text-white min-h-screen w-full flex flex-col lg:flex-row gap-6 justify-center items-center'>
         
         
-       <div>
+       <div className='mx-5 lg:mx-0'>
           <h1 className='text-center text-2xl'>Sector Selector</h1>
-          <Display setResponse={setResponse} />
+          <Display setResponse={setResponse} setSelectedOptionsTree={setSelectedOptionsTree} />
        </div>
 
         {
           response && (
-            <div>
+            <div className='mx-5 lg:mx-0'>
                 <h1 className='text-center'>Edit data for <span className='font-bold'>{response.name}</span></h1>
-                <Display data={response} setResponse={setResponse} />
+                <h1 className='text-xl font-bold'>Selected Sectors</h1>
+                <SeletedTree selectedArr={selectedOptionsTree} />
+                <Display data={response} setResponse={setResponse} setSelectedOptionsTree={setSelectedOptionsTree} />
             </div>
           )
         }
