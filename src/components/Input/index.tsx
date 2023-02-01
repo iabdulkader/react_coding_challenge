@@ -34,7 +34,7 @@ export default function Input({
     )
 }
 
-Input.Div = function ({ children, className }: { children: React.ReactNode, className?: string }) {
+Input.Div = function Div({ children, className }: { children: React.ReactNode, className?: string }) {
     return (
         <div className={`my-2 relative z-[0] ${className}`}>
             {children}
@@ -42,7 +42,7 @@ Input.Div = function ({ children, className }: { children: React.ReactNode, clas
     )
 }
 
-Input.Label = function ({ label }: { label: string }) {
+Input.Label = function Label({ label }: { label: string }) {
     return (
         <label 
             className="absolute left-0 text-gray-100 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
@@ -51,13 +51,13 @@ Input.Label = function ({ label }: { label: string }) {
     )
 }
 
-Input.Error = function ({ error }: { error: string }) {
+Input.Error = function Error({ error }: { error: string }) {
     return (
         <p className="inset-0 my-0 text-xs text-red-600 dark:text-red-500">{error}</p>
     )
 }
 
-Input.Input = function ({ value, error, label, type, onChange, className }: InputProps) {
+Input.Input = function Input({ value, error, label, type, onChange, className }: InputProps) {
     return (
         <input 
             placeholder=" " 
